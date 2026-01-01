@@ -9,7 +9,10 @@ import java.net.URL;
 public class OpsPilotClient {
 
     private final OpsPilotConfig config;
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper()
+            .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule())
+            .disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
 
     public OpsPilotClient(OpsPilotConfig config) {
         this.config = config;
